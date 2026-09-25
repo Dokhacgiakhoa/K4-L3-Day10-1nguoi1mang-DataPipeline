@@ -5,7 +5,7 @@
 | Thông tin | Nội dung |
 | --- | --- |
 | Họ và tên | Đỗ Thái Sơn |
-| MSSV | 2A202603021 |
+| MSSV | 03021 |
 | Khóa/Lớp | K4 — K4-L3-DAY10 |
 | Tên nhóm | 1nguoi1mang |
 | Vai trò chính | Member 2 — Data Ingestion & Cleaning |

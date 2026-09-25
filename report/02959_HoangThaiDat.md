@@ -5,7 +5,7 @@
 | Thông tin         | Nội dung                  |
 | ------------------ | -------------------------- |
 | Họ và tên       | Hoàng Thái Đạt             |
-| MSSV               | 2A202602959            |
+| MSSV               | 02959            |
 | Khóa/Lớp         | K4-L3-DAY10              |
 | Tên nhóm         | 1nguoi1mang     |
 | Vai trò chính    | Phụ trách Controlled Corruption & Reporting (Member 3)                 |

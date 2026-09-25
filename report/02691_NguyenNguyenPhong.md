@@ -7,9 +7,9 @@
 | Thông tin         | Nội dung                                                                                       |
 | ----------------- | ---------------------------------------------------------------------------------------------- |
 | Họ và tên         | Nguyễn Nguyên Phong                                                                            |
-| MSSV              | SE184883                                                                                       |
+| MSSV              | 02691                                                                                          |
 | Khóa/Lớp          | K4-L3-DAY10                                                                                    |
-| Tên nhóm          | K4-L3-DAY10-1nguoi1mang-DataPipeline                                                           |
+| Tên nhóm          | 1nguoi1mang                                                                                    |
 | Vai trò chính     | Data Quality Gate (Great Expectations 1.x), Freshness SLA & Test Set (Member 4)                |
 | Repository        | https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline                          |
 | Ngày hoàn thành   | 2026-09-25                                                                                     |
