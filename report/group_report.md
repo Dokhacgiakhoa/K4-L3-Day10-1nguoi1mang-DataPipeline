@@ -14,8 +14,8 @@
 | STT | Họ và tên | MSSV | Vai trò chính | Module/deliverable sở hữu |
 | --: | --- | --- | --- | --- |
 | 1 | Đỗ Khắc Gia Khoa | 02733 | Pipeline Lead & Integration Architect | `src/core/config.py`, `src/core/utils.py`, `src/pipelines/phase1.py`, `src/pipelines/corruption_flow.py`, `data/fixtures/` |
-| 2 | Đỗ Thái Sơn | 2A202603021 | Data Ingestion & Cleaning | `src/ingestion/crossref.py`, `src/ingestion/cleaning.py` |
-| 3 | Hoàng Thái Đạt | 2A202602959 | Controlled Corruption & Reporting | `src/ingestion/corruption.py`, `src/observability/reporting.py` |
+| 2 | Đỗ Thái Sơn | 03021 | Data Ingestion & Cleaning | `src/ingestion/crossref.py`, `src/ingestion/cleaning.py` |
+| 3 | Hoàng Thái Đạt | 02959 | Controlled Corruption & Reporting | `src/ingestion/corruption.py`, `src/observability/reporting.py` |
 | 4 | Nguyễn Nguyên Phong | [MSSV4] | Data Observability & Evaluation | `src/observability/quality.py`, `src/evaluation/testset.py` |
 
 PR tương ứng: [#5](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/5) (Khoa), [#6](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/6) (Sơn), [#7](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/7) (Đạt), [#8](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/8) (Phong) — cả 4 PR đã merge vào `main`.
