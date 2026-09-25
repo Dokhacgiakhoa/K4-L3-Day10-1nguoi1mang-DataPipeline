@@ -130,9 +130,8 @@ Starter Repo được cấu trúc dạng module hóa rõ ràng:
 └── pyproject.toml           <- Quản lý dependencies (Python 3.11-3.13)
 ```
 
-> ⚠️ **LƯU Ý VỀ CODE KHUNG:**  
-> Các file trong `src/` chứa các khối `TODO(student)` và `raise NotImplementedError`. Đây là bài tập thiết kế kỹ thuật, nhóm cần đọc kỹ docstring và hoàn thiện từng module theo thứ tự hướng dẫn trong [Guide.md](docs/Guide.md).  
-> Trên `main` hiện tại: `src/pipelines/*` (Issue #1, [PR #5](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/5)) và toàn bộ `src/retrieval/*` + `src/evaluation/metrics.py` đã hoàn thiện sẵn. Các module còn lại — `src/ingestion/*` (Issue #2), `src/ingestion/corruption.py` + `src/observability/reporting.py` (Issue #3), `src/observability/quality.py` + `src/evaluation/testset.py` (Issue #4) — đang được từng thành viên hoàn thiện song song.
+> ✅ **TRẠNG THÁI CODE KHUNG:**  
+> Starter repo ban đầu chứa các khối `TODO(student)` và `raise NotImplementedError` trong `src/`. **Toàn bộ đã được 4 thành viên hoàn thiện và merge vào `main`** qua [PR #5](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/5) (Issue #1 — pipelines/core), [PR #6](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/6) (Issue #2 — ingestion), [PR #7](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/7) (Issue #3 — corruption/reporting), [PR #8](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/8) (Issue #4 — quality/testset). Không còn `NotImplementedError` nào trong `src/`. Đã chạy thật end-to-end cả `run_phase1.py` và `run_corruption_flow.py` trên code merge của cả nhóm, xem kết quả tại [report/group_report.md](report/group_report.md).
 
 ---
 
@@ -200,10 +199,15 @@ GOOGLE_API_KEY=your_gemini_api_key_here
 ## 6. QUY TẮC PHỐI HỢP & CHECKLIST TRƯỚC KHI NỘP BÀI
 
 ### 👥 Phân công thực tế của nhóm (xem chi tiết & checklist tại từng GitHub Issue):
-- **[Issue #1](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/1) — Pipeline Lead & Integrator** (branch `feat/m1-pipelines`): quản lý `core/`, điều phối `phase1.py` và `corruption_flow.py`. **Đã hoàn thành và merge (PR #5).**
-- **[Issue #2](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/2) — Data Ingestion & Cleaning** (branch `feat/m2-ingestion`): `crossref.py`, `cleaning.py`.
-- **[Issue #3](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/3) — Controlled Corruption & Reporting** (branch `feat/m3-corruption-reporting`): `corruption.py`, `reporting.py`.
-- **[Issue #4](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/4) — Quality Gate & Test Set** (branch `feat/m4-quality-testset`): `quality.py` (GX 1.x), `testset.py`.
+
+| Issue | Thành viên | MSSV | Phạm vi | PR | Báo cáo cá nhân |
+|---|---|---|---|---|---|
+| [#1](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/1) — Pipeline Lead & Integrator | Đỗ Khắc Gia Khoa | 02733 | `core/`, `phase1.py`, `corruption_flow.py` | [#5](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/5) ✅ merged | [report/Khoa_DoKhacGiaKhoa.md](report/Khoa_DoKhacGiaKhoa.md) |
+| [#2](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/2) — Data Ingestion & Cleaning | Đỗ Thái Sơn | 03021 | `crossref.py`, `cleaning.py` | [#6](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/6) ✅ merged | [report/2A202603021_DoThaiSon.md](report/2A202603021_DoThaiSon.md) |
+| [#3](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/3) — Controlled Corruption & Reporting | Hoàng Thái Đạt | 02959 | `corruption.py`, `reporting.py` | [#7](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/7) ✅ merged | [report/2A202602959-HoangThaiDat.md](report/2A202602959-HoangThaiDat.md) |
+| [#4](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/4) — Quality Gate & Test Set | Nguyễn Nguyên Phong | *(chưa có)* | `quality.py` (GX 1.x), `testset.py` | [#8](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/8) ✅ merged | *(chưa nộp)* |
+
+Cả 4 PR đã merge vào `main`; pipeline đã chạy thật end-to-end thành công trên code hoàn chỉnh của cả nhóm — xem số liệu chi tiết tại [report/group_report.md](report/group_report.md). Việc còn thiếu trước khi nộp: MSSV và báo cáo cá nhân của Phong.
 
 > 🔀 **Làm việc song song không chờ nhau:** mỗi issue chỉ đụng vào file độc quyền của mình (Zero Conflict) và dùng dữ liệu mẫu tại [`data/fixtures/`](data/fixtures/) để tự test độc lập — không ai phải chờ module của người khác chạy được trước. Chi tiết quy tắc nằm trong mô tả từng Issue.
 
@@ -211,21 +215,22 @@ GOOGLE_API_KEY=your_gemini_api_key_here
 
 ### 📋 Checklist Nghiệm thu & Điều kiện nộp bài (Checkpoint 6):
 
-- [ ] **Môi trường:** Chạy lệnh smoke test in ra `Môi trường sẵn sàng`.
-- [ ] **Pha 1 (Baseline):** Lệnh `python script/run_phase1.py` chạy trơn tru, sinh đầy đủ:
+- [x] **Môi trường:** Chạy lệnh smoke test in ra `Môi trường sẵn sàng`.
+- [x] **Pha 1 (Baseline):** Lệnh `python script/run_phase1.py` chạy trơn tru (đã chạy thật, exit code 0), sinh đầy đủ:
   - `data/clean/papers_clean.csv`
   - `data/eval/test_set.json`
-  - `data/results/baseline_metrics.json`
+  - `data/results/baseline_metrics.json` (`retrieval_hit_rate = 1.00`)
   - `data/reports/phase1_report.md`
-- [ ] **Pha 2 (Corruption & Repair):** Lệnh `python script/run_corruption_flow.py` chạy thành công, tạo ra:
-  - `data/results/corruption_log.json` (ghi nhận 6 dạng lỗi)
-  - `data/results/corrupted_metrics.json` (chứng minh chỉ số giảm sút)
-  - `data/results/repaired_metrics.json` (chứng minh chỉ số phục hồi)
+- [x] **Pha 2 (Corruption & Repair):** Lệnh `python script/run_corruption_flow.py` chạy thành công (đã chạy thật, exit code 0), tạo ra:
+  - `data/results/corruption_log.json` (ghi nhận đủ 6 dạng lỗi)
+  - `data/results/corrupted_metrics.json` (`retrieval_hit_rate` giảm còn `0.60`, `gx_success = False`)
+  - `data/results/repaired_metrics.json` (phục hồi tuyệt đối về `1.00`, `gx_success = True`)
   - `data/reports/corruption_report.md` (bảng đối chiếu 3 trạng thái rõ ràng)
-- [ ] **Data Observability (GX 1.x):** Quality Gate sử dụng cú pháp chuẩn GX 1.x (`gx.get_context()`, `add_pandas()`), phát hiện thành công khi data bị inject lỗi.
-- [ ] **Bảo mật:** Không commit file `.env` hoặc API Key cá nhân lên GitHub.
-- [ ] **Kiểm tra Contributor trên GitHub:** 
+- [x] **Data Observability (GX 1.x):** Quality Gate dùng đúng cú pháp chuẩn GX 1.x (`gx.get_context(mode="ephemeral")`, `add_pandas()`), đã xác nhận phát hiện đúng khi data bị inject lỗi (fail `expect_column_values_to_be_unique` và `expect_column_value_lengths_to_be_between` trên dữ liệu corrupted).
+- [x] **Bảo mật:** Không commit file `.env` hoặc API Key cá nhân lên GitHub (đã rà soát lịch sử commit).
+- [x] **Kiểm tra Contributor trên GitHub:** 
   > ⚠️ **QUY TẮC ĐIỂM DANH GITHUB:**  
   > GitHub chỉ ghi nhận đóng góp khi commit được push trực tiếp vào **nhánh mặc định (`main`)**.  
   > Trước khi nộp bài, mở trình duyệt vào repo nhóm, chọn tab **Insights > Contributors**. Bắt buộc mọi thành viên trong nhóm đều phải xuất hiện trên biểu đồ commit thì mới được tính điểm chuyên cần nhóm!
-- [ ] **Nộp bài lên VLearn LMS:** Mỗi thành viên copy đường link repository GitHub của nhóm và nộp lên cổng LMS trước khi đồng hồ đếm ngược kết thúc 240 phút!
+  > Đã xác nhận cả 4 thành viên có commit đúng tác giả trên `main` (`git log --format="%an <%ae>"`); GitHub UI có thể mất vài phút để cập nhật lại biểu đồ Contributors sau khi lịch sử được sửa.
+- [ ] **Nộp bài lên VLearn LMS:** Mỗi thành viên copy đường link repository GitHub của nhóm và nộp lên cổng LMS trước khi đồng hồ đếm ngược kết thúc 240 phút! *(việc của từng người, tự thực hiện)*
