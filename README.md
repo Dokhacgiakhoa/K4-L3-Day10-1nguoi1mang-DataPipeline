@@ -1,7 +1,7 @@
 # K4-L3-DAY10 — 1nguoi1mang — Data Pipeline & Data Observability for RAG
 
 > **Nhóm:** 1nguoi1mang · **Lớp:** K4-L3-DAY10 · **Repository:** [K4-L3-Day10-1nguoi1mang-DataPipeline](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline)
-> **Trạng thái:** ✅ Cả 4 module đã merge vào `main` ([PR #5](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/5)–[#8](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/8)) · Đã chạy thật end-to-end (`run_phase1.py`, `run_corruption_flow.py`, exit code 0)
+> **Trạng thái:** ✅ Cả 4 module đã merge vào `main` ([PR #5](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/5)–[#8](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/8)) · Đã chạy thật end-to-end (`run_phase1.py`, `run_corruption_flow.py`, exit code 0) · Bonus **B1 + B2 + B3** đã hoàn thành ([xem chi tiết](#-hạng-mục-bonus))
 > **Báo cáo:** [report/group_report.md](report/group_report.md) (báo cáo nhóm) · [report/](report/) (báo cáo cá nhân từng thành viên)
 
 Phần đầu file này tóm tắt **kết quả nộp bài** theo đúng khung chấm điểm của BTC, để giảng khảo/trợ giảng chấm nhanh. Toàn bộ **đề bài gốc, kiến trúc, timeline và hướng dẫn kỹ thuật của BTC** được giữ nguyên vẹn ở [phần Phụ lục cuối file](#-phụ-lục--đề-bài-gốc--hướng-dẫn-kỹ-thuật-từ-btc).
@@ -95,6 +95,16 @@ python script/run_corruption_flow.py   # Corrupt -> eval -> idempotent repair ->
 ```
 
 Kết quả kỳ vọng: cả 2 lệnh thoát `exit code 0`, sinh đủ artifact trong `data/results/`, `data/quality/`, `data/reports/`. Chi tiết cài đặt môi trường, `.env` xem [Phụ lục §5](#5-thiết-lập-môi-trường--khởi-động-checkpoint-0).
+
+**Bonus (tùy chọn):**
+
+```bash
+python -m pip install -e ".[dev]"        # pytest + coverage (Bonus B3)
+python script/run_tests.py               # 84 test, coverage 97% trên src/
+
+python -m pip install -e ".[dashboard]"  # streamlit (Bonus B1)
+streamlit run dashboard/app.py           # http://localhost:8501
+```
 
 ## 📂 Cấu trúc mã nguồn
 
