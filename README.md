@@ -105,7 +105,9 @@ Starter Repo được cấu trúc dạng module hóa rõ ràng:
 │   ├── eval/                <- File test set benchmark
 │   ├── quality/             <- Báo cáo Great Expectations và Freshness SLA
 │   ├── reports/             <- Báo cáo Markdown (phase1_report.md, corruption_report.md)
-│   └── results/             <- File JSON ghi nhận chỉ số (baseline, corrupted, repaired)
+│   ├── results/             <- File JSON ghi nhận chỉ số (baseline, corrupted, repaired)
+│   └── fixtures/            <- Dữ liệu mẫu đúng contract (schema) để mỗi thành viên tự test module
+│                                riêng mà không cần chờ module của người khác hoàn thành
 ├── script/
 │   ├── run_phase1.py        <- Entrypoint chạy toàn bộ Baseline Pipeline (CP3)
 │   └── run_corruption_flow.py <- Entrypoint chạy Corruption, Repair & Comparison (CP4-CP5)
@@ -129,7 +131,8 @@ Starter Repo được cấu trúc dạng module hóa rõ ràng:
 ```
 
 > ⚠️ **LƯU Ý VỀ CODE KHUNG:**  
-> Các file trong `src/` chứa các khối `TODO(student)` và `raise NotImplementedError`. Đây là bài tập thiết kế kỹ thuật, nhóm cần đọc kỹ docstring và hoàn thiện từng module theo thứ tự hướng dẫn trong [Guide.md](docs/Guide.md).
+> Các file trong `src/` chứa các khối `TODO(student)` và `raise NotImplementedError`. Đây là bài tập thiết kế kỹ thuật, nhóm cần đọc kỹ docstring và hoàn thiện từng module theo thứ tự hướng dẫn trong [Guide.md](docs/Guide.md).  
+> Trên `main` hiện tại: `src/pipelines/*` (Issue #1, [PR #5](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/5)) và toàn bộ `src/retrieval/*` + `src/evaluation/metrics.py` đã hoàn thiện sẵn. Các module còn lại — `src/ingestion/*` (Issue #2), `src/ingestion/corruption.py` + `src/observability/reporting.py` (Issue #3), `src/observability/quality.py` + `src/evaluation/testset.py` (Issue #4) — đang được từng thành viên hoàn thiện song song.
 
 ---
 
@@ -196,11 +199,13 @@ GOOGLE_API_KEY=your_gemini_api_key_here
 
 ## 6. QUY TẮC PHỐI HỢP & CHECKLIST TRƯỚC KHI NỘP BÀI
 
-### 👥 Phân chia vai trò gợi ý (Nhóm 4 thành viên):
-- **Thành viên 1 (Pipeline Lead & Integrator):** Điều phối luồng, quản lý cấu hình `core/`, kết nối `phase1.py` và `corruption_flow.py`.
-- **Thành viên 2 (Data Foundation Owner):** Phụ trách thu thập `crossref.py`, làm sạch `cleaning.py` và khôi phục dữ liệu từ Raw.
-- **Thành viên 3 (RAG & Agent Specialist):** Quản lý Embedding MiniLM, ChromaDB vector store, logic truy vấn và QA Agent trong `retrieval/`.
-- **Thành viên 4 (Observability & Evaluation Lead):** Triển khai Great Expectations 1.x trong `quality.py`, Freshness SLA, bộ `testset.py` và sinh báo cáo Markdown đối chiếu.
+### 👥 Phân công thực tế của nhóm (xem chi tiết & checklist tại từng GitHub Issue):
+- **[Issue #1](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/1) — Pipeline Lead & Integrator** (branch `feat/m1-pipelines`): quản lý `core/`, điều phối `phase1.py` và `corruption_flow.py`. **Đã hoàn thành và merge (PR #5).**
+- **[Issue #2](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/2) — Data Ingestion & Cleaning** (branch `feat/m2-ingestion`): `crossref.py`, `cleaning.py`.
+- **[Issue #3](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/3) — Controlled Corruption & Reporting** (branch `feat/m3-corruption-reporting`): `corruption.py`, `reporting.py`.
+- **[Issue #4](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/4) — Quality Gate & Test Set** (branch `feat/m4-quality-testset`): `quality.py` (GX 1.x), `testset.py`.
+
+> 🔀 **Làm việc song song không chờ nhau:** mỗi issue chỉ đụng vào file độc quyền của mình (Zero Conflict) và dùng dữ liệu mẫu tại [`data/fixtures/`](data/fixtures/) để tự test độc lập — không ai phải chờ module của người khác chạy được trước. Chi tiết quy tắc nằm trong mô tả từng Issue.
 
 ---
 

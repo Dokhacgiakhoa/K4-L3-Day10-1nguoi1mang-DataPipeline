@@ -1,8 +1,8 @@
 # Danh Sách Thành Viên & Báo Cáo Phân Công Nhóm
 
-- **Tên Nhóm:** `[Điền tên nhóm]`
+- **Tên Nhóm:** `1nguoi1mang`
 - **Mã Nhóm / Lớp:** `K4-L3-DAY10`
-- **Tên Repository Nộp Bài:** `K4-L3-DAY10-TenNhom-DataPipeline`
+- **Tên Repository Nộp Bài:** [`K4-L3-Day10-1nguoi1mang-DataPipeline`](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline)
 
 ---
 
@@ -21,38 +21,37 @@
 
 ## # Cá nhân
 
-### ## HoVaTen1-MSSV1
+### ## Đỗ Khắc Gia Khoa - MSSV1
 - **Vai trò:** Trưởng nhóm & Điều phối Pipeline.
+- **Trạng thái:** ✅ Hoàn thành, merged ([PR #5](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/5)).
 - **Công việc chi tiết đã hoàn thành:**
   - Thiết lập cấu hình hệ thống `core/config.py` và đường dẫn artifacts `core/utils.py`.
-  - Kết nối luồng thực thi trong `src/pipelines/phase1.py` và `src/pipelines/corruption_flow.py`.
-  - Kiểm tra tính nhất quán của các artifacts và theo dõi Contributor tracking trên GitHub nhánh `main`.
+  - Kết nối luồng thực thi trong `src/pipelines/phase1.py` (Ingest → Clean → Index → Testset → Evaluate → Quality/Freshness → Report) và `src/pipelines/corruption_flow.py` (Corrupt → Evaluate → Idempotent Repair → 3-state Report).
+  - Tạo `data/fixtures/` — dữ liệu mẫu đúng contract để cả nhóm test độc lập, không chờ nhau.
+  - Chạy end-to-end thật, xác nhận: Baseline hit_rate=100% (GX PASS, fresh) → Corrupted hit_rate=60% (GX FAIL, stale) → Repaired hit_rate=100% (GX PASS, fresh, khớp baseline).
 - **Điều học được / Đóng góp chính:**
   - Hiểu sâu sắc về thiết kế Idempotent Pipeline và quản lý trạng thái luồng dữ liệu đa tầng.
 
-### ## HoVaTen2-MSSV2
-- **Vai trò:** Phụ trách Ingestion, Làm sạch & Phục hồi dữ liệu.
+### ## Đỗ Thái Sơn - MSSV2
+- **Vai trò:** Phụ trách Ingestion & Cleaning dữ liệu.
+- **Trạng thái:** 🚧 Đang thực hiện (branch `feat/m2-ingestion`, [Issue #2](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/2)).
 - **Công việc chi tiết đã hoàn thành:**
-  - Xây dựng module thu thập Crossref API với cơ chế Fallback offline trong `src/ingestion/crossref.py`.
-  - Chuẩn hóa schema, tính toán trường `age_days` và `text_for_embedding` trong `src/ingestion/cleaning.py`.
-  - Thực thi cơ chế Idempotent Repair phục hồi dữ liệu từ raw snapshot.
+  - _(cập nhật sau khi PR merge)_
 - **Điều học được / Đóng góp chính:**
-  - Kỹ thuật truy vết nguồn gốc dữ liệu (Data Lineage) và bảo toàn raw snapshot trước khi biến đổi.
+  - _(cập nhật sau khi PR merge)_
 
-### ## HoVaTen3-MSSV3
-- **Vai trò:** Phụ trách RAG, Vector Database & Embedding.
+### ## Hoàng Thái Đạt - MSSV3
+- **Vai trò:** Phụ trách Controlled Corruption & Reporting.
+- **Trạng thái:** 🚧 Đang thực hiện (branch `feat/m3-corruption-reporting`, [Issue #3](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/3)).
 - **Công việc chi tiết đã hoàn thành:**
-  - Quản lý mô hình embedding `sentence-transformers/all-MiniLM-L6-v2`.
-  - Nạp và quản lý 3 collection riêng biệt trong ChromaDB (`papers-baseline`, `papers-corrupted`, `papers-repaired`).
-  - Xây dựng QA Agent truy vấn ngữ cảnh chính xác theo tài liệu.
+  - _(cập nhật sau khi PR merge)_
 - **Điều học được / Đóng góp chính:**
-  - Cách cô lập các không gian vector để so sánh khách quan giữa dữ liệu sạch và dữ liệu bị lỗi.
+  - _(cập nhật sau khi PR merge)_
 
-### ## HoVaTen4-MSSV4
-- **Vai trò:** Phụ trách Data Observability & Benchmark Evaluation.
+### ## Nguyễn Nguyên Phong - MSSV4
+- **Vai trò:** Phụ trách Data Observability (GX 1.x) & Test Set.
+- **Trạng thái:** 🚧 Đang thực hiện (branch `feat/m4-quality-testset`, [Issue #4](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/4)).
 - **Công việc chi tiết đã hoàn thành:**
-  - Thiết lập Quality Gate theo chuẩn mới **Great Expectations 1.x** và giám sát Freshness SLA trong `src/observability/quality.py`.
-  - Xây dựng bộ câu hỏi đánh giá chuẩn trong `src/evaluation/testset.py`.
-  - Đo lường và xuất bảng đối chiếu 3 trạng thái vào `data/reports/corruption_report.md`.
+  - _(cập nhật sau khi PR merge)_
 - **Điều học được / Đóng góp chính:**
-  - Cách thiết lập hệ thống cảnh báo sớm chặn đứng hiện tượng Silent Failure trước khi dữ liệu vào serving layer.
+  - _(cập nhật sau khi PR merge)_

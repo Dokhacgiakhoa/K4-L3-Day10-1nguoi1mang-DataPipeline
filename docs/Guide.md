@@ -7,6 +7,8 @@ Chào mừng bạn đến với tài liệu hướng dẫn từng bước của 
 > 
 > Hãy đi từng bước một cách bình tĩnh, kiểm tra kỹ **Tín hiệu hoàn thành** ở mỗi bước trước khi chuyển sang bước tiếp theo nhé.
 
+> 🔀 **Làm nhóm song song, không cần chờ nhau:** nếu module bạn phụ trách cần dữ liệu đầu vào từ bước của người khác (ví dụ `df` đã clean, `test_set.json`, các file report/metrics), hãy dùng ngay dữ liệu mẫu đúng schema tại [`data/fixtures/`](../data/fixtures/) để tự kiểm thử độc lập. Xem checklist & lệnh test riêng cho từng vai trò trong GitHub Issue tương ứng (#1–#4) của repo nhóm.
+
 ---
 
 ## Bước 1: Khởi tạo Môi trường & Cấu hình
