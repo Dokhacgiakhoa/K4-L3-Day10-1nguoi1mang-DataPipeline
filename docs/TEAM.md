@@ -21,7 +21,7 @@
 
 ## # Cá nhân
 
-### ## Đỗ Khắc Gia Khoa - MSSV1
+### ## Đỗ Khắc Gia Khoa - 02733
 - **Vai trò:** Trưởng nhóm & Điều phối Pipeline.
 - **Trạng thái:** ✅ Hoàn thành, merged ([PR #5](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/5)).
 - **Công việc chi tiết đã hoàn thành:**
@@ -32,21 +32,25 @@
 - **Điều học được / Đóng góp chính:**
   - Hiểu sâu sắc về thiết kế Idempotent Pipeline và quản lý trạng thái luồng dữ liệu đa tầng.
 
-### ## Đỗ Thái Sơn - MSSV2
+### ## Đỗ Thái Sơn - 03021
 - **Vai trò:** Phụ trách Ingestion & Cleaning dữ liệu.
-- **Trạng thái:** 🚧 Đang thực hiện (branch `feat/m2-ingestion`, [Issue #2](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/2)).
+- **Trạng thái:** ✅ Hoàn thành, merged ([PR #6](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/6)). Báo cáo cá nhân: [report/03021_DoThaiSon.md](../report/03021_DoThaiSon.md).
 - **Công việc chi tiết đã hoàn thành:**
-  - _(cập nhật sau khi PR merge)_
+  - Triển khai `parse_crossref_payload()` và `fetch_source_records()` — gọi Crossref API có retry cho status tạm thời (429/5xx), tự fallback đọc snapshot offline khi mất mạng.
+  - Triển khai `build_clean_dataframe()` — chuẩn hóa text, tính `age_days`, khử trùng lặp theo `paper_id`, dựng `text_for_embedding` 5 khối, sort xác định (tie-break theo `paper_id`) để kết quả tái lập được giữa các lần chạy.
+  - Xác minh toàn bộ 312 ô dữ liệu khớp tuyệt đối với `data/fixtures/papers_clean.json` (contract chuẩn của nhóm).
 - **Điều học được / Đóng góp chính:**
-  - _(cập nhật sau khi PR merge)_
+  - Tầng ingestion phải xác định (deterministic) thì mọi so sánh baseline/corrupted/repaired phía sau mới có ý nghĩa; phát hiện và xử lý rủi ro sort không ổn định của pandas khi nhiều bản ghi trùng ngày xuất bản.
 
-### ## Hoàng Thái Đạt - MSSV3
+### ## Hoàng Thái Đạt - 02959
 - **Vai trò:** Phụ trách Controlled Corruption & Reporting.
-- **Trạng thái:** 🚧 Đang thực hiện (branch `feat/m3-corruption-reporting`, [Issue #3](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/3)).
+- **Trạng thái:** ✅ Hoàn thành, merged ([PR #7](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/7)). Báo cáo cá nhân: [report/02959_HoangThaiDat.md](../report/02959_HoangThaiDat.md).
 - **Công việc chi tiết đã hoàn thành:**
-  - _(cập nhật sau khi PR merge)_
+  - Triển khai `corrupt_clean_dataframe()` — tiêm đủ 6 kịch bản lỗi (drop bản ghi mới, xóa/nhiễu summary, cắt title, lùi ngày, nhân đôi dòng) với seed cố định để tái lập được, ghi log chi tiết từng kịch bản.
+  - Triển khai `generate_phase1_report()` và `generate_corruption_report()` — sinh báo cáo Markdown đối chiếu 3 trạng thái từ metrics/quality report thật.
+  - Rebase lại branch sau khi phát hiện conflict với PR #5/#6/#8 và sửa bug đọc sai tên field (`hit_rate`/`token_f1` → `retrieval_hit_rate`/`mean_token_f1`) khiến báo cáo từng hiển thị sai số liệu.
 - **Điều học được / Đóng góp chính:**
-  - _(cập nhật sau khi PR merge)_
+  - Tiêm lỗi có seed cố định giúp kiểm chứng Quality Gate một cách tái lập được; dữ liệu bẩn (đặc biệt mất `summary`) ảnh hưởng rất lớn đến độ chính xác của RAG.
 
 ### ## Nguyễn Nguyên Phong - 02691
 - **Vai trò:** Phụ trách Data Observability (GX 1.x) & Test Set.

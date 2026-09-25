@@ -182,22 +182,18 @@ Bảng đối chiếu cả ba trạng thái được xuất ra `data/reports/cor
 
 ## 8. Phân tích kết quả
 
-> **Chưa có số liệu tại thời điểm nộp báo cáo này (2026-09-25).**
->
-> Các metric dưới đây yêu cầu chạy trọn `pipelines/phase1.py` và `pipelines/corruption_flow.py`, vốn phụ thuộc vào những module hiện vẫn đang là stub `NotImplementedError` trên `main`: `ingestion/corruption.py` (Issue #3), `observability/quality.py` và `evaluation/testset.py` (Issue #4), `observability/reporting.py` (Issue #3), cùng hai pipeline của Issue #1.
->
-> Theo cam kết ở mục 10 — *"Tôi không ghi 'đã chạy thành công' cho phần chưa được kiểm chứng"* — tôi để trống thay vì điền số suy đoán. Phần này sẽ được cập nhật ngay sau khi PR của Issue #1, #3, #4 được merge và nhóm chạy được E2E thật.
+> **Cập nhật 2026-09-25 (sau khi PR #5, #7, #8 merge và nhóm chạy E2E thật):** phần dự đoán để trống bên dưới lúc nộp lần đầu nay đã có số liệu thật từ `python script/run_phase1.py` và `python script/run_corruption_flow.py` chạy trên `main`. Giữ nguyên phần dự đoán gốc ở "Kết luận từ số liệu" và đối chiếu ngay sau đó — đúng theo cam kết ở mục 10 là không sửa số liệu để làm đẹp báo cáo.
 
 ### Metrics chính
 
 | Metric/signal | Baseline | Corrupted | Repaired | Nhận xét của cá nhân |
 | --- | ---: | ---: | ---: | --- |
-| `retrieval_hit_rate` | — | — | — | Chờ E2E |
-| `mean_token_f1` | — | — | — | Chờ E2E |
-| `judge_accuracy` | — | — | — | Chờ E2E |
-| `mean_judge_score` | — | — | — | Chờ E2E |
-| Quality checks | — | — | — | Chờ E2E |
-| Freshness status | — | — | — | Chờ E2E |
+| `retrieval_hit_rate` | 1.00 | 0.60 | 1.00 | Đúng dạng Silent Failure: dữ liệu lỗi không làm agent báo lỗi, chỉ âm thầm trả lời sai/thiếu |
+| `mean_token_f1` | 1.00 | 0.822 | 1.00 | Giảm ít hơn hit_rate — nhiều câu vẫn trúng một phần dù tài liệu bị nhiễu |
+| `judge_accuracy` | 1.00 | 0.90 | 1.00 | LLM judge khoan dung hơn token F1 |
+| `mean_judge_score` | 5 | 4 | 5 | Nhất quán với judge_accuracy |
+| Quality checks (`gx_success`) | True | False | True | Fail đúng `unique(paper_id)` và `summary length` — 2 kịch bản duplicate + blank/truncate summary |
+| Freshness status (`is_fresh`) | True (4.2% stale) | True (23.8% stale) | True (4.2% stale) | Tăng mạnh nhưng chưa vượt ngưỡng 25% trong lần chạy này |
 
 ### Những gì đã kiểm chứng được ở tầng dữ liệu
 
@@ -221,6 +217,8 @@ Hai chuỗi nhân quả dưới đây là **giả thuyết dựa trên contract 
 2. [Repair bằng cách ingest lại từ raw snapshot] → [quality checks pass trở lại, freshness về trong ngưỡng SLA] → [metric agent phục hồi về sát baseline].
 
 Dự đoán của tôi: trong 6 kịch bản corruption, **xóa trắng `summary`** sẽ gây thiệt hại nặng nhất. Lý do nằm ở chính cấu trúc `text_for_embedding` mà tôi dựng: `summary` là khối dài nhất trong 5 khối, chiếm phần lớn nội dung ngữ nghĩa được embed. Mất nó thì document chỉ còn tiêu đề và metadata, vector gần như không còn thông tin để phân biệt. Ngược lại, kịch bản lùi `published` 365 ngày sẽ đánh mạnh vào freshness SLA nhưng gần như **không** ảnh hưởng retrieval, vì `published` chỉ là một dòng ngắn trong chuỗi embed. Nếu số liệu thực tế bác bỏ dự đoán này, tôi sẽ ghi lại nguyên nhân khi cập nhật mục 8.
+
+> **Đối chiếu với số liệu thật:** dự đoán trên **bị bác bỏ một phần**. `retrieval_hit_rate` giảm mạnh nhất (100% → 60%) chủ yếu do kịch bản **drop_latest_records** (4/24 bản ghi bị loại hẳn khỏi index), chứ không phải do blank/noise summary như tôi dự đoán. Lý do tôi bỏ sót: mất tài liệu khỏi index (drop) khiến agent **hoàn toàn không có gì để truy xuất** cho câu hỏi liên quan — một dạng lỗi nặng hơn hẳn so với "tài liệu vẫn ở trong index nhưng nội dung bị nhiễu" (blank/noise summary), vì với dạng sau agent đôi khi vẫn suy luận đúng một phần nhờ tiêu đề/metadata còn nguyên. Phần dự đoán về `published` (ảnh hưởng freshness nhưng không ảnh hưởng retrieval) thì **đúng**: `is_fresh` vẫn `True` do stale ratio 23.8% chưa vượt ngưỡng 25%, đúng như tôi dự đoán dựa trên cấu trúc `text_for_embedding`.
 
 ## 9. Điều học được và hướng cải thiện
 

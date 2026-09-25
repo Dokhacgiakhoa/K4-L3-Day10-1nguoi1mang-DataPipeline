@@ -74,7 +74,17 @@ Quality check (GX) bắt lỗi về cấu trúc, độ dài, null, trong khi fre
 Khi metrics (Hit Rate, Token F1) của Repaired quay trở lại bằng (hoặc xấp xỉ) Baseline, và Quality checks Pass trở lại.
 
 ## 8. Phân tích kết quả
-(Đã kiểm chứng khi chạy các hàm report mẫu, sẽ có kết quả thực tế khi chạy E2E)
+Cập nhật sau khi chạy `python script/run_phase1.py` và `python script/run_corruption_flow.py` trên `main` (2026-09-25):
+
+| Metric/signal | Baseline | Corrupted | Repaired |
+| --- | ---: | ---: | ---: |
+| Hit Rate | 1.00 | 0.60 | 1.00 |
+| Token F1 | 1.00 | 0.82 | 1.00 |
+| Judge Accuracy | 1.00 | 0.90 | 1.00 |
+| GX Success | True | False | True |
+| Is Fresh | True | True (23.8% stale, gần ngưỡng 25%) | True |
+
+`corrupt_clean_dataframe()` (hàm tôi viết) làm Hit Rate rớt từ 100% xuống 60% — đúng như mục tiêu thiết kế: kịch bản drop 20% bản ghi mới nhất khiến agent không tìm được tài liệu, còn duplicate rows + blank/truncate summary làm GX fail đúng 2 expectation (`unique(paper_id)`, `summary length`). Sau khi Repair build lại từ raw snapshot, cả 2 hàm `generate_phase1_report()`/`generate_corruption_report()` của tôi in ra đúng số liệu phục hồi 100% về baseline — xác nhận báo cáo Markdown đọc đúng key (`retrieval_hit_rate`/`mean_token_f1`) trên dữ liệu thật sau khi rebase, không chỉ trên dữ liệu mẫu như lúc tự kiểm thử ban đầu.
 
 ## 9. Điều học được và hướng cải thiện
 

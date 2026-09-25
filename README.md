@@ -71,9 +71,9 @@ Chạy lần cuối trên `main` sau khi cả 4 PR merge (`python script/run_pha
 
 | Hạng mục | Trạng thái | Ghi chú |
 | --- | :---: | --- |
+| **B1 — Interactive Observability Dashboard** | ✅ Có | [`dashboard/app.py`](dashboard/app.py) (Streamlit) — đọc trực tiếp artifact thật trong `data/`, hiển thị GX 1.x pass/fail, Freshness SLA, histogram `age_days`, Drift Monitor so với Baseline, bảng so sánh 3 trạng thái. Chạy: `pip install -e ".[dashboard]"` rồi `streamlit run dashboard/app.py`. Xem [dashboard/README.md](dashboard/README.md) |
 | **B2 — Automated Self-Healing / Auto-Repair Pipeline** | ✅ Có | [`corruption_flow.py::main()`](src/pipelines/corruption_flow.py) tự phát hiện thiếu baseline artifact và tự chạy `phase1` trước; repair tự động build lại từ raw snapshot mà không cần can thiệp thủ công |
 | **B3 — Automated Test Suite (Pytest CI)** | ✅ Có | [`tests/`](tests/) — 84 test pass + 1 xfail (bug đã biết, ghi lại có chủ đích), **coverage 97%** trên `src/` (đo bằng `pytest --cov`), phủ đủ Ingestion/Cleaning/GX Suite/Retrieval theo yêu cầu rubric. Chạy qua [GitHub Actions](.github/workflows/tests.yml) mỗi push/PR, hoặc one-click `python script/run_tests.py` |
-| **B1 — Interactive Observability Dashboard** | ✅ Có | [`dashboard/app.py`](dashboard/app.py) (Streamlit) — đọc trực tiếp artifact thật trong `data/`, hiển thị GX 1.x pass/fail, Freshness SLA, histogram `age_days`, Drift Monitor so với Baseline, bảng so sánh 3 trạng thái. Chạy: `pip install -e ".[dashboard]"` rồi `streamlit run dashboard/app.py`. Xem [dashboard/README.md](dashboard/README.md) |
 
 ## ✅ Checklist nộp bài (theo [docs/SUBMISSION.md](docs/SUBMISSION.md))
 
@@ -83,7 +83,7 @@ Chạy lần cuối trên `main` sau khi cả 4 PR merge (`python script/run_pha
 - [x] Có bằng chứng số liệu suy giảm/phục hồi trong `baseline_metrics.json`, `corrupted_metrics.json`, `repaired_metrics.json`
 - [x] `docs/TEAM.md` đã điền đầy đủ tên/MSSV/phân công của cả 4 thành viên
 - [x] Không commit `.env`/API key lên GitHub (đã rà soát lịch sử commit)
-- [x] Cả 4 thành viên xuất hiện trên GitHub Insights → Contributors nhánh `main`
+- [~] Cả 4 thành viên có commit đúng tác giả trên `main` (xác nhận qua `git log` và GitHub API cấp commit) — trang **Insights → Contributors** có thể cache trễ vài giờ sau khi lịch sử được sửa, kiểm tra lại trực tiếp trước khi nộp: `https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/graphs/contributors`
 - [ ] Từng thành viên tự nộp link repo lên VLearn LMS — **việc cá nhân, tự thực hiện**
 
 ## 🚀 Chạy thử nhanh

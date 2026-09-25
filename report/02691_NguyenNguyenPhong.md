@@ -164,26 +164,28 @@ python -c "import pandas as pd; from evaluation.testset import build_test_set; t
 
 ## 8. Phân tích kết quả
 
+> **Cập nhật 2026-09-25:** bảng dưới đây đã được đối chiếu lại với `data/results/*.json` thật trên `main` sau khi chạy `python script/run_phase1.py` và `python script/run_corruption_flow.py` — vài con số ở bản nháp trước đó (chạy thử ở thời điểm module `corruption.py`/`quality.py` chưa hoàn thiện) đã lệch so với kết quả cuối cùng, nay sửa lại cho khớp.
+
 ### Metrics chính
 
 | Metric/signal          | Baseline | Corrupted | Repaired | Nhận xét của cá nhân                                                                                 |
 | ---------------------- | -------: | --------: | -------: | ---------------------------------------------------------------------------------------------------- |
 | `retrieval_hit_rate`   |     1.00 |      0.60 |     1.00 | Dữ liệu lỗi làm mất 40% khả năng truy xuất đúng tài liệu; sau khi phục hồi đạt lại độ chính xác 100%.|
-| `mean_token_f1`        |     1.00 |      0.65 |     1.00 | Độ tương đồng từ khóa của câu trả lời sụt giảm mạnh khi bị nhiễu và phục hồi hoàn toàn sau repair.   |
-| `judge_accuracy`       |     1.00 |      0.60 |     1.00 | Đánh giá của LLM Judge phản ánh rõ nét hiện tượng hallucination trên tập dữ liệu bẩn.               |
-| `mean_judge_score`     |      5.0 |       3.6 |      5.0 | Điểm chất lượng trung bình giảm từ 5/5 xuống 3.6/5 do câu trả lời thiếu cơ sở dữ liệu.               |
+| `mean_token_f1`        |     1.00 |      0.82 |     1.00 | Độ tương đồng từ khóa của câu trả lời giảm khi bị nhiễu, ít hơn mức giảm của hit_rate, và phục hồi hoàn toàn sau repair. |
+| `judge_accuracy`       |     1.00 |      0.90 |     1.00 | LLM Judge khoan dung hơn token F1 với câu trả lời gần đúng, nhưng vẫn phát hiện đúng chiều suy giảm. |
+| `mean_judge_score`     |      5.0 |       4.0 |      5.0 | Điểm chất lượng trung bình giảm từ 5/5 xuống 4/5 do câu trả lời thiếu cơ sở dữ liệu.               |
 | Quality checks         |     PASS |      FAIL |     PASS | Chốt kiểm dịch GX 1.x phát hiện chính xác vi phạm tính duy nhất (`paper_id`) và độ dài tóm tắt.     |
-| Freshness status       |    FRESH |     STALE |    FRESH | Tỷ lệ bài báo cũ tăng vọt lên 50% trong tập corrupted (ngưỡng 25%) và được trả lại 4.17% sau repair.|
+| Freshness status       |    FRESH |      FRESH (23.8% stale) |    FRESH | Tỷ lệ bài báo cũ tăng từ 4.2% lên 23.8% — tăng mạnh nhưng **chưa vượt ngưỡng 25%** nên is_fresh vẫn True trong lần chạy này; đủ dòng bị lùi ngày hơn sẽ trip cờ FAIL. |
 
 ### Kết luận từ số liệu
 
 1. **Chuỗi nguyên nhân 1 (Tiêm lỗi dữ liệu):**
-   Tiêm lỗi xóa tóm tắt + lùi ngày xuất bản + nhân bản dòng $\rightarrow$ Quality checks báo FAIL (vi phạm unique `paper_id` & min length `summary`) và Freshness SLA báo STALE (`stale_ratio = 50%`) $\rightarrow$ RAG `retrieval_hit_rate` giảm sâu từ 1.0 xuống 0.6, `judge_accuracy` giảm từ 1.0 xuống 0.6 (Silent Failure).
+   Tiêm lỗi duplicate rows + blank/truncate summary $\rightarrow$ Quality checks báo FAIL (vi phạm unique `paper_id` & min length `summary`); tiêm lỗi drop bản ghi mới nhất $\rightarrow$ tài liệu biến mất hoàn toàn khỏi vector index $\rightarrow$ RAG `retrieval_hit_rate` giảm sâu từ 1.0 xuống 0.6, `judge_accuracy` giảm từ 1.0 xuống 0.9 (Silent Failure — Agent không báo lỗi, chỉ âm thầm trả lời sai/thiếu).
 2. **Chuỗi nguyên nhân 2 (Cơ chế phục hồi Idempotent Repair):**
-   Thực thi nạp lại và tái tạo từ bản sao lưu thô ban đầu (`crossref_records.json`) $\rightarrow$ Quality Gate và Freshness SLA phục hồi trạng thái xanh PASS (`success = True`, `is_fresh = True`) $\rightarrow$ Toàn bộ các chỉ số RAG (`hit_rate`, `token_f1`, `judge_score`) lấy lại 100% phong độ của Baseline ban đầu.
+   Thực thi nạp lại và tái tạo từ bản sao lưu thô ban đầu (`crossref_records.json`) $\rightarrow$ Quality Gate phục hồi trạng thái xanh PASS (`success = True`) $\rightarrow$ Toàn bộ các chỉ số RAG (`hit_rate`, `token_f1`, `judge_score`) lấy lại 100% phong độ của Baseline ban đầu.
 
 **Corruption nào ảnh hưởng rõ nhất và vì sao?**
-Lỗi **Blank Summary** và **Drop Latest Records** gây ảnh hưởng nghiêm trọng nhất. Khi tóm tắt bị rỗng hoặc bài báo mới bị rơi, mô hình nhúng vector không có đủ thông tin ngữ nghĩa để ánh xạ vào không gian biểu diễn, dẫn đến việc Retriever lấy sai tài liệu (hoặc không tìm thấy tài liệu liên quan), buộc Agent phải suy đoán gây ra hiện tượng ảo giác (Hallucination).
+Kịch bản **Drop Latest Records** ảnh hưởng nghiêm trọng nhất đến `retrieval_hit_rate`. Khác với blank/noise summary (tài liệu vẫn còn trong index, chỉ suy giảm nội dung, nên Agent đôi khi vẫn suy luận đúng một phần nhờ tiêu đề/metadata còn nguyên), drop_latest_records khiến tài liệu **biến mất hoàn toàn** khỏi không gian vector — Retriever không có gì để tìm, buộc Agent phải suy đoán, gây ra hiện tượng ảo giác (Hallucination) rõ rệt nhất trong 6 kịch bản.
 
 **Kết quả nào khác với kỳ vọng ban đầu?**
 Ban đầu tôi dự đoán rằng khi dữ liệu bị lỗi, Agent sẽ báo lỗi ngoại lệ (`Exception`). Tuy nhiên trong thực tế, Agent vẫn đưa ra câu trả lời rất lưu loát và tự tin dù điểm Hit Rate sụt giảm nghiêm trọng. Điều này minh chứng cho tính chất nguy hiểm của **Silent Failure** và khẳng định tầm quan trọng sống còn của trạm kiểm soát chất lượng dữ liệu (**Data Quality Gate**).
