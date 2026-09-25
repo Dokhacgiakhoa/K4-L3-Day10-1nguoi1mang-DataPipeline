@@ -1,0 +1,45 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Cache pip / HF / sentence-transformers downloads
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pip
+            ~/.cache/huggingface
+          key: ${{ runner.os }}-deps-${{ hashFiles('pyproject.toml') }}
+
+      - name: Install project (editable) + dev dependencies
+        run: python -m pip install -e ".[dev]"
+
+      - name: Run pytest with coverage
+        run: python -m pytest tests/ -v --cov=src --cov-report=term-missing --cov-report=xml
+        env:
+          # Bo test khong goi API LLM that (chay offline qua LLM_PROVIDER=mock
+          # duoc tao truc tiep trong tests/conftest.py va tests/test_pipelines_integration.py),
+          # nhung load_settings() van doc .env.example-style default neu khong co .env.
+          LLM_PROVIDER: mock
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-xml
+          path: coverage.xml

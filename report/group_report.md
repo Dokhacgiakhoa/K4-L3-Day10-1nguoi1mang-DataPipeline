@@ -242,7 +242,7 @@ Kết quả khác kỳ vọng ban đầu của nhóm: dự đoán trước khi c
 | --- | --- | --- |
 | Trong lần chạy này, kịch bản stale-date chỉ tác động 4/21 dòng (23.8% stale), chưa đủ vượt ngưỡng 25% để trip `is_fresh=False` | Freshness SLA chưa được minh chứng ở trạng thái "cảnh báo" thực sự trong lần chạy này, dù cơ chế đã đúng (số liệu tăng đúng hướng) | Tăng số dòng bị stale-date trong `corrupt_clean_dataframe()` (ví dụ 30% thay vì 20%) để chủ động trip ngưỡng, chứng minh đầy đủ cả hai nhánh `is_fresh=True/False` |
 | `reporting.py` (PR #7) còn một field sai tên (`source_summary.get('total_raw', ...)`, thực tế key là `total_records`) chưa được sửa | Dòng "Total raw records" trong `phase1_report.md` luôn hiển thị N/A | Đạt sửa 1 dòng, verify lại bằng cách chạy `generate_phase1_report()` với `data/fixtures` và kiểm tra dòng đó không còn N/A |
-| Chưa có test tự động (pytest) cho các module — mọi xác minh hiện dựa trên script chạy tay và fixture | Không ai chạy lại được đúng bộ kiểm thử sau khi merge; dễ regressions không bị phát hiện | Viết bộ test pytest cho `build_clean_dataframe()`, `corrupt_clean_dataframe()`, `run_data_quality_checks()` dựa trên các edge case đã thử tay, đo cải thiện bằng cách tiêm lỗi giả và xác nhận test fail đúng chỗ |
+Đã bổ sung sau khi viết báo cáo này: bộ test tự động tại [`tests/`](../tests/) (84 test, coverage 97% trên `src/`), chạy qua [GitHub Actions](../.github/workflows/tests.yml) hoặc `python script/run_tests.py` — xem [README §Hạng mục Bonus](../README.md#-hạng-mục-bonus).
 
 ## 13. Checklist trước khi nộp
 

@@ -23,6 +23,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
   "pytest>=8.3.2",
+  "pytest-cov>=5.0.0",
 ]
 
 [build-system]
@@ -34,3 +35,24 @@ package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.pytest.ini_options]
+markers = [
+  "slow: tests that load the embedding model, build ChromaDB, or run Great Expectations (a few seconds each).",
+]
+
+[tool.coverage.run]
+source = ["src"]
+omit = [
+  "src/retrieval/agent.py",
+  "src/retrieval/llm.py",
+  "src/evaluation/metrics.py",
+]
+
+[tool.coverage.report]
+# agent.py / llm.py / metrics.py goi truc tiep LLM provider that (Gemini/OpenAI/...)
+# nen khong nam trong pham vi bo test tu dong offline nay; loai khoi so coverage
+# de con so phan anh dung phan da duoc test that.
+exclude_also = [
+  "if __name__ == .__main__.:",
+]

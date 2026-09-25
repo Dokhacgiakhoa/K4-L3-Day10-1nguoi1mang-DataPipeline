@@ -10,10 +10,10 @@
 
 | STT | Họ và tên | MSSV | Email | Vai trò & Phân công công việc | GitHub Issue | Báo cáo cá nhân |
 |---:|---|---|---|---|---|---|
-| 1 | Đỗ Khắc Gia Khoa (@Dokhacgiakhoa) | 02733 | dokhacgiakhoa666@gmail.com | Trưởng nhóm / Pipeline Integrator (`core/`, `phase1.py`, `corruption_flow.py`, `data/fixtures/`) | [Issue #1](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/1) | [`report/Khoa_DoKhacGiaKhoa.md`](../report/Khoa_DoKhacGiaKhoa.md) |
-| 2 | Đỗ Thái Sơn (@tsun165) | 03021 | sondoforwork@gmail.com | Data Ingestion & Cleaning (`crossref.py`, `cleaning.py`) | [Issue #2](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/2) | [`report/2A202603021_DoThaiSon.md`](../report/2A202603021_DoThaiSon.md) |
-| 3 | Hoàng Thái Đạt (@Liber72) | 02959 | hoangthaidat722004@gmail.com | Controlled Corruption & Reporting (`corruption.py`, `reporting.py`, smoke test `retrieval/`) | [Issue #3](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/3) | [`report/2A202602959-HoangThaiDat.md`](../report/2A202602959-HoangThaiDat.md) |
-| 4 | Nguyễn Nguyên Phong (@Heargreaves1) | 02691 | nguyennguyenphong977@gmail.com | Observability & Evaluation (`quality.py` GX 1.x, Freshness SLA, `testset.py`) | [Issue #4](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/4) | [`report/SE184883_NguyenNguyenPhong.md`](../report/SE184883_NguyenNguyenPhong.md) |
+| 1 | Đỗ Khắc Gia Khoa (@Dokhacgiakhoa) | 02733 | dokhacgiakhoa666@gmail.com | Trưởng nhóm / Pipeline Integrator (`core/`, `phase1.py`, `corruption_flow.py`, `data/fixtures/`) | [Issue #1](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/1) | [`report/02733_DoKhacGiaKhoa.md`](../report/02733_DoKhacGiaKhoa.md) |
+| 2 | Đỗ Thái Sơn (@tsun165) | 03021 | sondoforwork@gmail.com | Data Ingestion & Cleaning (`crossref.py`, `cleaning.py`) | [Issue #2](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/2) | [`report/03021_DoThaiSon.md`](../report/03021_DoThaiSon.md) |
+| 3 | Hoàng Thái Đạt (@Liber72) | 02959 | hoangthaidat722004@gmail.com | Controlled Corruption & Reporting (`corruption.py`, `reporting.py`, smoke test `retrieval/`) | [Issue #3](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/3) | [`report/02959_HoangThaiDat.md`](../report/02959_HoangThaiDat.md) |
+| 4 | Nguyễn Nguyên Phong (@Heargreaves1) | 02691 | nguyennguyenphong977@gmail.com | Observability & Evaluation (`quality.py` GX 1.x, Freshness SLA, `testset.py`) | [Issue #4](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/4) | [`report/02691_NguyenNguyenPhong.md`](../report/02691_NguyenNguyenPhong.md) |
 
 *(Nếu nhóm có 3 hoặc 5-6 thành viên, xem bảng phân công chi tiết theo vai trò trong file `CHECKPOINTS.md`)*.
 
@@ -50,7 +50,7 @@
 
 ### ## Nguyễn Nguyên Phong - 02691
 - **Vai trò:** Phụ trách Data Observability (GX 1.x) & Test Set.
-- **Trạng thái:** ✅ Hoàn thành, merged ([PR #8](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/8)). Báo cáo cá nhân: [report/SE184883_NguyenNguyenPhong.md](../report/SE184883_NguyenNguyenPhong.md).
+- **Trạng thái:** ✅ Hoàn thành, merged ([PR #8](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/8)). Báo cáo cá nhân: [report/02691_NguyenNguyenPhong.md](../report/02691_NguyenNguyenPhong.md).
 - **Công việc chi tiết đã hoàn thành:**
   - Triển khai `run_data_quality_checks()` — Great Expectations 1.x (Ephemeral Context) với đủ 4 expectations bắt buộc.
   - Triển khai `build_freshness_report()` — Freshness SLA, cảnh báo `is_fresh=False` khi > 25% bản ghi có `age_days > 180`.

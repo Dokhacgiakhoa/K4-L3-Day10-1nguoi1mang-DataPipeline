@@ -43,10 +43,10 @@ Chi tiết số liệu từng tiêu chí, quyết định kỹ thuật và phân
 
 | Issue | Thành viên | MSSV | Phạm vi (file độc quyền) | PR | Báo cáo cá nhân |
 | --- | --- | --- | --- | --- | --- |
-| [#1](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/1) Pipeline Lead & Integrator | Đỗ Khắc Gia Khoa | 02733 | `core/`, `phase1.py`, `corruption_flow.py` | [#5](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/5) ✅ | [Khoa_DoKhacGiaKhoa.md](report/Khoa_DoKhacGiaKhoa.md) |
-| [#2](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/2) Data Ingestion & Cleaning | Đỗ Thái Sơn | 03021 | `crossref.py`, `cleaning.py` | [#6](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/6) ✅ | [2A202603021_DoThaiSon.md](report/2A202603021_DoThaiSon.md) |
-| [#3](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/3) Controlled Corruption & Reporting | Hoàng Thái Đạt | 02959 | `corruption.py`, `reporting.py` | [#7](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/7) ✅ | [2A202602959-HoangThaiDat.md](report/2A202602959-HoangThaiDat.md) |
-| [#4](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/4) Quality Gate & Test Set | Nguyễn Nguyên Phong | 02691 | `quality.py` (GX 1.x), `testset.py` | [#8](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/8) ✅ | [SE184883_NguyenNguyenPhong.md](report/SE184883_NguyenNguyenPhong.md) |
+| [#1](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/1) Pipeline Lead & Integrator | Đỗ Khắc Gia Khoa | 02733 | `core/`, `phase1.py`, `corruption_flow.py` | [#5](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/5) ✅ | [02733_DoKhacGiaKhoa.md](report/02733_DoKhacGiaKhoa.md) |
+| [#2](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/2) Data Ingestion & Cleaning | Đỗ Thái Sơn | 03021 | `crossref.py`, `cleaning.py` | [#6](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/6) ✅ | [03021_DoThaiSon.md](report/03021_DoThaiSon.md) |
+| [#3](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/3) Controlled Corruption & Reporting | Hoàng Thái Đạt | 02959 | `corruption.py`, `reporting.py` | [#7](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/7) ✅ | [02959_HoangThaiDat.md](report/02959_HoangThaiDat.md) |
+| [#4](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/4) Quality Gate & Test Set | Nguyễn Nguyên Phong | 02691 | `quality.py` (GX 1.x), `testset.py` | [#8](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/8) ✅ | [02691_NguyenNguyenPhong.md](report/02691_NguyenNguyenPhong.md) |
 
 Danh sách đầy đủ + phần tự khai đóng góp: [docs/TEAM.md](docs/TEAM.md). Cả 4 người đều có commit đúng tác giả trên `main` (đã xác minh qua `git log`).
 
@@ -72,8 +72,8 @@ Chạy lần cuối trên `main` sau khi cả 4 PR merge (`python script/run_pha
 | Hạng mục | Trạng thái | Ghi chú |
 | --- | :---: | --- |
 | **B2 — Automated Self-Healing / Auto-Repair Pipeline** | ✅ Có | [`corruption_flow.py::main()`](src/pipelines/corruption_flow.py) tự phát hiện thiếu baseline artifact và tự chạy `phase1` trước; repair tự động build lại từ raw snapshot mà không cần can thiệp thủ công |
+| **B3 — Automated Test Suite (Pytest CI)** | ✅ Có | [`tests/`](tests/) — 84 test pass + 1 xfail (bug đã biết, ghi lại có chủ đích), **coverage 97%** trên `src/` (đo bằng `pytest --cov`), phủ đủ Ingestion/Cleaning/GX Suite/Retrieval theo yêu cầu rubric. Chạy qua [GitHub Actions](.github/workflows/tests.yml) mỗi push/PR, hoặc one-click `python script/run_tests.py` |
 | B1 — Interactive Observability Dashboard | ❌ Chưa làm | — |
-| B3 — Automated Test Suite (Pytest CI) | ❌ Chưa làm | Ghi nhận là hướng cải thiện trong báo cáo nhóm |
 
 ## ✅ Checklist nộp bài (theo [docs/SUBMISSION.md](docs/SUBMISSION.md))
 
