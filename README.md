@@ -73,7 +73,7 @@ Chạy lần cuối trên `main` sau khi cả 4 PR merge (`python script/run_pha
 | --- | :---: | --- |
 | **B2 — Automated Self-Healing / Auto-Repair Pipeline** | ✅ Có | [`corruption_flow.py::main()`](src/pipelines/corruption_flow.py) tự phát hiện thiếu baseline artifact và tự chạy `phase1` trước; repair tự động build lại từ raw snapshot mà không cần can thiệp thủ công |
 | **B3 — Automated Test Suite (Pytest CI)** | ✅ Có | [`tests/`](tests/) — 84 test pass + 1 xfail (bug đã biết, ghi lại có chủ đích), **coverage 97%** trên `src/` (đo bằng `pytest --cov`), phủ đủ Ingestion/Cleaning/GX Suite/Retrieval theo yêu cầu rubric. Chạy qua [GitHub Actions](.github/workflows/tests.yml) mỗi push/PR, hoặc one-click `python script/run_tests.py` |
-| B1 — Interactive Observability Dashboard | ❌ Chưa làm | — |
+| **B1 — Interactive Observability Dashboard** | ✅ Có | [`dashboard/app.py`](dashboard/app.py) (Streamlit) — đọc trực tiếp artifact thật trong `data/`, hiển thị GX 1.x pass/fail, Freshness SLA, histogram `age_days`, Drift Monitor so với Baseline, bảng so sánh 3 trạng thái. Chạy: `pip install -e ".[dashboard]"` rồi `streamlit run dashboard/app.py`. Xem [dashboard/README.md](dashboard/README.md) |
 
 ## ✅ Checklist nộp bài (theo [docs/SUBMISSION.md](docs/SUBMISSION.md))
 
@@ -109,7 +109,7 @@ Kết quả kỳ vọng: cả 2 lệnh thoát `exit code 0`, sinh đủ artifact
 │   ├── quality/         <- Báo cáo GX 1.x + freshness (Issue #4)
 │   ├── results/          <- Metrics JSON của 3 trạng thái
 │   └── reports/          <- phase1_report.md, corruption_report.md (Issue #3)
-├── script/            <- run_phase1.py, run_corruption_flow.py (Issue #1)
+├── script/            <- run_phase1.py, run_corruption_flow.py (Issue #1), run_tests.py (Bonus B3)
 ├── src/
 │   ├── core/            <- config.py, utils.py (Issue #1)
 │   ├── ingestion/         <- crossref.py, cleaning.py (Issue #2); corruption.py (Issue #3)
@@ -117,6 +117,9 @@ Kết quả kỳ vọng: cả 2 lệnh thoát `exit code 0`, sinh đủ artifact
 │   ├── evaluation/          <- testset.py (Issue #4); metrics.py (đã có sẵn)
 │   ├── observability/        <- quality.py (Issue #4); reporting.py (Issue #3)
 │   └── pipelines/           <- phase1.py, corruption_flow.py (Issue #1)
+├── tests/              <- Bộ test pytest, 97% coverage (Bonus B3)
+├── dashboard/           <- Streamlit Observability Dashboard (Bonus B1)
+├── .github/workflows/     <- CI chạy pytest mỗi push/PR (Bonus B3)
 ├── report/             <- group_report.md + báo cáo cá nhân từng thành viên
 ├── docs/               <- Tài liệu gốc của BTC (Guide/CHECKPOINTS/RUBRIC/RULES/SUBMISSION/TEAM)
 └── pyproject.toml

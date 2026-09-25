@@ -10,3 +10,4 @@ doc_verification_report.md
 .coverage
 coverage.xml
 htmlcov/
+.claude/launch.json
