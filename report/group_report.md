@@ -16,7 +16,7 @@
 | 1 | Đỗ Khắc Gia Khoa | 02733 | Pipeline Lead & Integration Architect | `src/core/config.py`, `src/core/utils.py`, `src/pipelines/phase1.py`, `src/pipelines/corruption_flow.py`, `data/fixtures/` |
 | 2 | Đỗ Thái Sơn | 03021 | Data Ingestion & Cleaning | `src/ingestion/crossref.py`, `src/ingestion/cleaning.py` |
 | 3 | Hoàng Thái Đạt | 02959 | Controlled Corruption & Reporting | `src/ingestion/corruption.py`, `src/observability/reporting.py` |
-| 4 | Nguyễn Nguyên Phong | [MSSV4] | Data Observability & Evaluation | `src/observability/quality.py`, `src/evaluation/testset.py` |
+| 4 | Nguyễn Nguyên Phong | 84883 | Data Observability & Evaluation | `src/observability/quality.py`, `src/evaluation/testset.py` |
 
 PR tương ứng: [#5](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/5) (Khoa), [#6](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/6) (Sơn), [#7](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/7) (Đạt), [#8](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/8) (Phong) — cả 4 PR đã merge vào `main`.
 
@@ -243,7 +243,6 @@ Kết quả khác kỳ vọng ban đầu của nhóm: dự đoán trước khi c
 | Trong lần chạy này, kịch bản stale-date chỉ tác động 4/21 dòng (23.8% stale), chưa đủ vượt ngưỡng 25% để trip `is_fresh=False` | Freshness SLA chưa được minh chứng ở trạng thái "cảnh báo" thực sự trong lần chạy này, dù cơ chế đã đúng (số liệu tăng đúng hướng) | Tăng số dòng bị stale-date trong `corrupt_clean_dataframe()` (ví dụ 30% thay vì 20%) để chủ động trip ngưỡng, chứng minh đầy đủ cả hai nhánh `is_fresh=True/False` |
 | `reporting.py` (PR #7) còn một field sai tên (`source_summary.get('total_raw', ...)`, thực tế key là `total_records`) chưa được sửa | Dòng "Total raw records" trong `phase1_report.md` luôn hiển thị N/A | Đạt sửa 1 dòng, verify lại bằng cách chạy `generate_phase1_report()` với `data/fixtures` và kiểm tra dòng đó không còn N/A |
 | Chưa có test tự động (pytest) cho các module — mọi xác minh hiện dựa trên script chạy tay và fixture | Không ai chạy lại được đúng bộ kiểm thử sau khi merge; dễ regressions không bị phát hiện | Viết bộ test pytest cho `build_clean_dataframe()`, `corrupt_clean_dataframe()`, `run_data_quality_checks()` dựa trên các edge case đã thử tay, đo cải thiện bằng cách tiêm lỗi giả và xác nhận test fail đúng chỗ |
-| Báo cáo cá nhân của Phong (Member 4, PR #8) chưa được nộp tại thời điểm viết báo cáo nhóm này | Thiếu 1/4 báo cáo cá nhân theo yêu cầu `report/README.md` | Phong bổ sung `report/<MSSV4>_NguyenNguyenPhong.md` theo mẫu `individual_report.md` trước hạn nộp |
 
 ## 13. Checklist trước khi nộp
 
@@ -254,5 +253,5 @@ Kết quả khác kỳ vọng ban đầu của nhóm: dự đoán trước khi c
 - [x] Bảng metrics khớp với các file trong `data/results/`.
 - [x] Quality/freshness conclusions khớp với `data/quality/`.
 - [x] Các đường dẫn báo cáo và artifact truy cập được.
-- [ ] Mỗi thành viên đã hoàn thành báo cáo vai trò riêng — **còn thiếu báo cáo cá nhân của Phong**.
+- [x] Mỗi thành viên đã hoàn thành báo cáo vai trò riêng (4/4: Khoa, Sơn, Đạt, Phong).
 - [x] Không có `.env`, API key, token hoặc secret trong source, report, log hay ảnh.

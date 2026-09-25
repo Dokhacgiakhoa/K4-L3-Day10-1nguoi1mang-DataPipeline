@@ -46,7 +46,7 @@ Chi tiết số liệu từng tiêu chí, quyết định kỹ thuật và phân
 | [#1](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/1) Pipeline Lead & Integrator | Đỗ Khắc Gia Khoa | 02733 | `core/`, `phase1.py`, `corruption_flow.py` | [#5](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/5) ✅ | [Khoa_DoKhacGiaKhoa.md](report/Khoa_DoKhacGiaKhoa.md) |
 | [#2](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/2) Data Ingestion & Cleaning | Đỗ Thái Sơn | 03021 | `crossref.py`, `cleaning.py` | [#6](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/6) ✅ | [2A202603021_DoThaiSon.md](report/2A202603021_DoThaiSon.md) |
 | [#3](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/3) Controlled Corruption & Reporting | Hoàng Thái Đạt | 02959 | `corruption.py`, `reporting.py` | [#7](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/7) ✅ | [2A202602959-HoangThaiDat.md](report/2A202602959-HoangThaiDat.md) |
-| [#4](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/4) Quality Gate & Test Set | Nguyễn Nguyên Phong | *(chưa có)* | `quality.py` (GX 1.x), `testset.py` | [#8](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/8) ✅ | *(chưa nộp)* |
+| [#4](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/issues/4) Quality Gate & Test Set | Nguyễn Nguyên Phong | 84883 | `quality.py` (GX 1.x), `testset.py` | [#8](https://github.com/Dokhacgiakhoa/K4-L3-Day10-1nguoi1mang-DataPipeline/pull/8) ✅ | [SE184883_NguyenNguyenPhong.md](report/SE184883_NguyenNguyenPhong.md) |
 
 Danh sách đầy đủ + phần tự khai đóng góp: [docs/TEAM.md](docs/TEAM.md). Cả 4 người đều có commit đúng tác giả trên `main` (đã xác minh qua `git log`).
 
@@ -81,7 +81,7 @@ Chạy lần cuối trên `main` sau khi cả 4 PR merge (`python script/run_pha
 - [x] `python script/run_corruption_flow.py` chạy thành công (exit code 0)
 - [x] `data/reports/corruption_report.md` có đủ bảng đối chiếu Baseline vs Corrupted vs Repaired
 - [x] Có bằng chứng số liệu suy giảm/phục hồi trong `baseline_metrics.json`, `corrupted_metrics.json`, `repaired_metrics.json`
-- [~] `docs/TEAM.md` đã điền tên/MSSV/phân công — **còn thiếu MSSV của Phong**
+- [x] `docs/TEAM.md` đã điền đầy đủ tên/MSSV/phân công của cả 4 thành viên
 - [x] Không commit `.env`/API key lên GitHub (đã rà soát lịch sử commit)
 - [x] Cả 4 thành viên xuất hiện trên GitHub Insights → Contributors nhánh `main`
 - [ ] Từng thành viên tự nộp link repo lên VLearn LMS — **việc cá nhân, tự thực hiện**
